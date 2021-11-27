@@ -30,13 +30,19 @@ def Frobenius_norm(A):
 def Frobenius_norm2(A):
     return LA.norm(A)
 
-
+"""
 def F1(A,A2):
     temp = 0
     for i in range(A.shape[0]):
-        temp+= (2 * np.transpose(A[i,:]).dot(A2[i,:]))/((A[i,:].dot(np.transpose(A[i,:]))+A2[i,:].dot(np.transpose(A2[i,:]))))
+        temp+= (2 * np.transpose(A[i,:]).dot(A2[i,:]))/(A[i,:].dot(np.transpose(A[i,:]))+A2[i,:].dot(np.transpose(A2[i,:])))
     
     return temp/A.shape[0]
+"""
+def F1(A,A2):
+    temp = 0
+    for i in range(A.shape[1]):
+        temp+= (2 * np.transpose(A[:,i]).dot(A2[:,i]))/(A[:,i].dot(np.transpose(A[:,i]))+A2[:,i].dot(np.transpose(A2[:,i])))
+    return temp/A.shape[1]
 
 
 def I_cos(A,A2):
@@ -72,15 +78,15 @@ def avg_Isub(Y,Y_true,X,X_true):
 
 
 np.random.seed(1)
-A = np.random.randint(2, size=(20,30))
+A = np.random.randint(2, size=(2,3))
 np.random.seed(31)
-A2 = np.random.randint(2, size=(20,30))
+A2 = np.random.randint(2, size=(2,3))
 
 
 np.random.seed(2)
-B = np.random.randint(2, size=(20,30))
+B = np.random.randint(2, size=(2,3))
 np.random.seed(32)
-B2 = np.random.randint(2, size=(20,30))
+B2 = np.random.randint(2, size=(2,3))
 
 #Am,An = A.shape
 #A2m,A2n = A2.shape
@@ -98,4 +104,3 @@ print("I_cos2 :",I_cos2(A,A2))
 print("avg_F1 :",avg_F1(A,A2,B,B2))
 print("avg_Icos :",avg_Icos(A,A2,B,B2))
 print("avg_Isub :",avg_Isub(A,A2,B,B2))
-
